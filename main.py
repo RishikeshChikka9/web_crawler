@@ -78,6 +78,7 @@ def main():
         text = response.text
     elif response.status_code > 399:
         print("Error:",response.status_code)
+	return
 
     while(True):
         if text == False:

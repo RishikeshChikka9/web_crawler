@@ -1,3 +1,6 @@
+#imports
+import requests
+
 #Bruteforce approach to regex 
 def search(pattern, text):
 	flag = False
@@ -65,19 +68,23 @@ def extract_links(text):
 		return new_text
 	else:
 		return False
-
-#main function	
+#main function
 def main():
-	flag = True
+    url = 'http://wagslane.dev'
+    
+    response = requests.get(url)
 
-	text = "aagadsfgasgasdsderfsaer<a href = '#about'>hello</a>afdsfghgadfds<a href = \"http://localhost/contacts\">contacts</a>rishkeshalksfjsvnsfksdf<div> <a href='https://google.com'> google </a> </div>"
+    if response.status_code == 200:
+        text = response.text
+    elif response.status_code > 399:
+        print("Error:",response.status_code)
 
-	while(True):
-		if text == False:
-			break
-		text = extract_links(text)
+    while(True):
+	    if text == False:
+		    break
+	    text = extract_links(text)
 
-	print(links)	
-
+    for link in links:
+	    print(link)	
 #calling main function
 main()

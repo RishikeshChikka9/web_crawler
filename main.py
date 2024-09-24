@@ -65,3 +65,19 @@ def extract_links(text):
 		return new_text
 	else:
 		return False
+
+#main function	
+def main():
+	flag = True
+
+	text = "aagadsfgasgasdsderfsaer<a href = '#about'>hello</a>afdsfghgadfds<a href = \"http://localhost/contacts\">contacts</a>rishkeshalksfjsvnsfksdf<div> <a href='https://google.com'> google </a> </div>"
+
+	while(True):
+		if text == False:
+			break
+		text = extract_links(text)
+
+	print(links)	
+
+#calling main function
+main()

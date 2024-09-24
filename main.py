@@ -22,3 +22,46 @@ def search(pattern, text):
 		else:
 			return [True, i - 1, i + (len(pattern) - 1)]
 	return [False]
+
+#stores the links 
+links = []
+
+def extract_links(text):
+
+	pattern1 = "<a"
+	pattern2 = "</a>"
+
+	start = search(pattern1, text)
+	end = search(pattern2, text)
+
+	if(start[0] and end[0]):
+
+		new_text = text[end[2]:len(text)]
+
+		output = ""
+
+		for i in range(start[1], end[2]):
+			output += text[i]
+
+		pattern_href1 = "href"
+		pattern_href2 = ">"
+
+		start = search(pattern_href1, output)
+		end = search(pattern_href2, output)
+		
+		new_output = ""
+
+		for i in range(start[2], end[1]):
+			new_output += output[i]
+
+		final_output = ""
+
+		for i in new_output:
+			if(i == "=" or i == "'" or i == " " or i == '"'):
+				continue
+			final_output += i
+
+		links.append(final_output)
+		return new_text
+	else:
+		return False

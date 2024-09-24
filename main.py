@@ -1,5 +1,6 @@
 #imports
 import requests
+import sys
 
 #Bruteforce approach to regex 
 def search(pattern, text):
@@ -70,8 +71,7 @@ def extract_links(text):
 		return False
 #main function
 def main():
-    url = 'http://wagslane.dev'
-    
+    url = sys.argv[1]
     response = requests.get(url)
 
     if response.status_code == 200:
@@ -80,11 +80,12 @@ def main():
         print("Error:",response.status_code)
 
     while(True):
-	    if text == False:
-		    break
-	    text = extract_links(text)
+        if text == False:
+            break
+        text = extract_links(text)
 
     for link in links:
-	    print(link)	
+        print(link)	
+
 #calling main function
 main()
